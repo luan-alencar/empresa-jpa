@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import david.augusto.luan.exceptions.CpfJaExisteException;
-import david.augusto.luan.exceptions.CpfNaoExisteException;
 import david.augusto.luan.exceptions.FuncionarioNaoExiste;
 import david.augusto.luan.interfaces.BuscarFuncionario;
 import david.augusto.luan.interfaces.CalcularSalario;
@@ -42,19 +41,19 @@ public class Empresa implements ContratarFuncionario, DemitirFuncionario, Calcul
 			if (f.getCpf().equals(cpf)) {
 				fun = f;
 			}
-			throw new FuncionarioNaoExiste();
+			throw new FuncionarioNaoExiste(cpf);
 		}
 		funcionarios.remove(fun);
 	}
 
 	@Override
-	public Funcionario buscarFuncionario(String cpf) throws CpfNaoExisteException {
+	public Funcionario buscarFuncionario(String cpf) throws FuncionarioNaoExiste {
 		Funcionario funcionario = null;
 		for (Funcionario f : funcionarios) {
 			if (f.getCpf().equals(cpf)) {
 				funcionario = f;
 			}
-			throw new CpfNaoExisteException(cpf);
+			throw new FuncionarioNaoExiste(cpf);
 		}
 		return funcionario;
 	}
