@@ -14,6 +14,7 @@ import david.augusto.luan.entidades.Funcionario;
 import david.augusto.luan.entidades.FuncionarioCLT;
 import david.augusto.luan.entidades.FuncionarioHorista;
 import david.augusto.luan.exceptions.CpfJaExisteException;
+import david.augusto.luan.exceptions.CpfNaoExisteException;
 import david.augusto.luan.exceptions.FuncionarioNaoExiste;
 
 public class EmpresaTest {
@@ -31,7 +32,7 @@ public class EmpresaTest {
 	}
 
 	@Test
-	void testContratarComSucesso() throws CpfJaExisteException {
+	void testContratarComSucesso() throws CpfJaExisteException, FuncionarioNaoExiste {
 		// Nesse caso, é para contratar o funcionário sem nenhum problema
 		FuncionarioCLT diretor = new FuncionarioCLT("555.555.555-55", "Diretor", 8000.0);
 		empresa.contratarFuncionario(diretor);
@@ -50,7 +51,7 @@ public class EmpresaTest {
 	}
 
 	@Test
-	void testGetFuncionarioQueExiste() throws FuncionarioNaoExiste {
+	void testGetFuncionarioQueExiste() throws CpfNaoExisteException {
 		// Esse funcionário existe
 		Funcionario f = empresa.buscarFuncionario("111.111.111-11");
 		assertNotNull(f);
@@ -58,7 +59,7 @@ public class EmpresaTest {
 	}
 
 	@Test
-	void testGetFuncionarioQueNaoExiste() throws FuncionarioNaoExiste {
+	void testGetFuncionarioQueNaoExiste() throws CpfNaoExisteException {
 		// Tentando procurar um funcionário que não existe
 		Exception ex = assertThrows(FuncionarioNaoExiste.class, () -> {
 			empresa.buscarFuncionario("666.666.666-66");
@@ -68,7 +69,7 @@ public class EmpresaTest {
 	}
 
 	@Test
-	void testDemitirFuncionarioQueExiste() throws FuncionarioNaoExiste {
+	void testDemitirFuncionarioQueExiste() throws FuncionarioNaoExiste, CpfJaExisteException, CpfNaoExisteException {
 		Funcionario f = empresa.buscarFuncionario("111.111.111-11");
 		assertNotNull(f);
 		// Confirma que o funcionário existe mesmo
