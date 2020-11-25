@@ -31,6 +31,7 @@ public class FuncionarioHorista extends Funcionario {
 
 	public FuncionarioHorista(String cpf, String nome, Double salario, Integer horasTrabalhadasNoMes) {
 		super(cpf, nome, salario);
+		this.valorHora = salario;
 		this.horasTrabalhadasNoMes = horasTrabalhadasNoMes;
 	}
 
