@@ -7,14 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "funcionario_clt")
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 public class FuncionarioCLT extends Funcionario {
 
@@ -47,6 +45,11 @@ public class FuncionarioCLT extends Funcionario {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public FuncionarioCLT(String cpf, String nome, Double salario) {
+		super(cpf, nome, salario);
+		this.salario = salario;
 	}
 
 }

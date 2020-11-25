@@ -17,15 +17,17 @@ import lombok.NoArgsConstructor;
 public abstract class Funcionario {
 
 	@NotNull
+	@Column(name = "cpf")
 	private String cpf;
 	@Column(name = "nome")
 	private String nome;
 	@Column(name = "salario")
 	private Double salario;
 
-	public Funcionario(String cpf, String nome) {
+	public Funcionario(String cpf, String nome, Double salario) {
 		this.cpf = cpf;
 		this.nome = nome;
+		this.salario = salario;
 	}
 
 }

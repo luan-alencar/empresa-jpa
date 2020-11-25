@@ -19,7 +19,7 @@ public class Empresa implements ContratarFuncionario, DemitirFuncionario, Calcul
 	private String nome;
 	private List<Funcionario> funcionarios;
 
-	public Empresa(String nome, List<Funcionario> funcionarios) {
+	public Empresa(String nome) {
 		this.nome = nome;
 		this.funcionarios = new ArrayList<Funcionario>();
 	}
@@ -35,10 +35,10 @@ public class Empresa implements ContratarFuncionario, DemitirFuncionario, Calcul
 	}
 
 	@Override
-	public void demitirFuncionario(Funcionario funcionario) throws FuncionarioNaoExiste {
+	public void demitirFuncionario(String cpf) throws FuncionarioNaoExiste {
 		Funcionario fun = null;
 		for (Funcionario f : funcionarios) {
-			if (f.getCpf().equals(funcionario.getCpf())) {
+			if (f.getCpf().equals(cpf)) {
 				fun = f;
 			}
 			throw new FuncionarioNaoExiste();
