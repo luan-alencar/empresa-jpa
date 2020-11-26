@@ -1,6 +1,7 @@
 package david.augusto.luan.entidades;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import david.augusto.luan.exceptions.CpfJaExisteException;
@@ -36,14 +37,15 @@ public class Empresa implements ContratarFuncionario, DemitirFuncionario, Calcul
 
 	@Override
 	public void demitirFuncionario(String cpf) throws FuncionarioNaoExiste {
-		Funcionario fun = null;
-		for (Funcionario f : funcionarios) {
-			if (f.getCpf().equals(cpf)) {
-				fun = f;
+		Iterator<Funcionario> iterator = funcionarios.iterator();
+
+		while (iterator.hasNext()) {
+			Funcionario funcionario = iterator.next();
+			if (funcionario.getCpf().equals(cpf)) {
+				iterator.remove();
 			}
 			throw new FuncionarioNaoExiste(cpf);
 		}
-		funcionarios.remove(fun);
 	}
 
 	@Override
